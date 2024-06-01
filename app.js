@@ -1,9 +1,11 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const userRoutes  = require('./routes/userRouter')
 
 const app =  express();
 
 app.use(express.json());
+app.use('/userGraphQL' , userRoutes);
 
 mongoose.connect('mongodb+srv://yashraj7011:12345@graphqlcrud.z4urhac.mongodb.net/graphqlcrud?retryWrites=true&w=majority')
 .then(()=> {

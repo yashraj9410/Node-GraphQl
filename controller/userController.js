@@ -2,7 +2,7 @@
 const User  =  require('../model/userModel')
  
 const getUser = async ( { id } ) => {
-    const user  = await User.finfById(id);
+    const user  = await User.findById(id);
     return user;
 }
 
@@ -11,8 +11,8 @@ const getUsers = async () => {
     return users;
 }
 
-const createUser = async ({ name , email , password }) {
-    const user  =  new User ({ name , emai , password });
+const createUser = async ({ name , email , password }) => {
+    const user  =  new User ({ name , email , password });
     await user.save();
     return user;
 }
