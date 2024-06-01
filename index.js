@@ -1,40 +1,17 @@
-const express = require('express');
-const { graphqlHTTP } = require('express-graphql')
-const { buildSchema } = require('graphql')
+const express = require('express')
+const mongoose = require('mongoose')
 
-const app  = express();
-
-const schema  = buildSchema(
-    `type Query {
-        hello: String,
-        greet(name: String): String
-            
-    }`
-);
-
-// resolver methods for the schema of graphql
-const root = {
-    hello: () => {
-        return "Hello World";
-    },
-    greet: ({name}) => {
-        return `Hello ${name}`;
-    }
-}
+const app =  express();
 
 app.use(express.json());
 
-// graphQL middleware
-app.use('/graphQl' , graphqlHTTP({
-    schema:schema,
-    rootValue:root,
-    graphiql:true
-}));
-
-// app.get('/' , (req,res) => {
-//     res.status(201).send("hello From replit + node")
-// })
-
-app.listen(3000 , () => {
-    console.log('Server Running on 3000');
+mongoose.connect('mongodb+srv://yashraj7011:12345@graphqlcrud.z4urhac.mongodb.net/graphqlcrud?retryWrites=true&w=majority')
+.then(()=> {
+    console.log("DB connection success")
+    app.listen(3000 , () => {
+        console.log('Server Running on port 3000')
+    })
+})
+.catch(err => {
+    console.log(`DB connection failed : ${err}`)
 })
