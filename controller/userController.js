@@ -26,3 +26,11 @@ const deleteUser  = async ({ id }) => {
     const user  =  await User.findByIdAndDelete(id);
     return user;
 }
+
+module.exports  = {
+    getUser,
+    getUsers,
+    createUser,
+    updateUser,
+    deleteUser
+}
